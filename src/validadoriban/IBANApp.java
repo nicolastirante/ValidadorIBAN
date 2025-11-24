@@ -9,8 +9,31 @@ package validadoriban;
  * @author nicot
  */
 
+import java.util.Scanner;
+
 public class IBANApp {
+
     public static void main(String[] args) {
-        System.out.println("Iniciando sistema...");
+        Scanner scanner = new Scanner(System.in);
+        boolean seguir = true;
+
+        System.out.println("=== SISTEMA VALIDADOR IBAN ===");
+
+        while (seguir) {
+            System.out.print("Ingrese IBAN: ");
+            String entrada = scanner.nextLine();
+
+            // Llamamos a tu clase ValidadorIBAN
+            if (ValidadorIBAN.validar(entrada)) {
+                System.out.println(">> VALIDO");
+            } else {
+                System.out.println(">> INVALIDO");
+            }
+
+            System.out.print("¿Otro? (S/N): ");
+            if (!scanner.nextLine().toUpperCase().startsWith("S")) {
+                seguir = false;
+            }
+        }
     }
 }
