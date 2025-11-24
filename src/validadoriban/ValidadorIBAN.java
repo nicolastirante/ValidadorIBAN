@@ -16,14 +16,14 @@ public class ValidadorIBAN {
     public static boolean validar(String iban) {
         if (iban == null) return false;
 
-        // Validacion longitud estandar (15-34)
-        if (iban.length() < 15 || iban.length() > 34) return false;
+        // MEJORA: Quitamos espacios aqui mismo
+        String ibanLimpio = iban.replace(" ", "").trim().toUpperCase();
 
-        // Reordenar: 4 primeros al final
-        String codigo = iban.toUpperCase();
-        String reordenado = codigo.substring(4) + codigo.substring(0, 4);
+        // Usamos la variable limpia
+        if (ibanLimpio.length() < 15 || ibanLimpio.length() > 34) return false;
 
-        // Letras a numeros
+        String reordenado = ibanLimpio.substring(4) + ibanLimpio.substring(0, 4);
+
         StringBuilder sb = new StringBuilder();
         for (char c : reordenado.toCharArray()) {
             if (Character.isDigit(c)) sb.append(c);
@@ -31,7 +31,6 @@ public class ValidadorIBAN {
             else return false;
         }
 
-        // Modulo 97
         try {
             BigInteger n = new BigInteger(sb.toString());
             return n.mod(new BigInteger("97")).intValue() == 1;
