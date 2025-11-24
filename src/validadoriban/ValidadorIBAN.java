@@ -4,22 +4,26 @@
  */
 package validadoriban;
 
+import java.math.BigInteger;
+
 /**
- *
+ * Clase que contiene la logica matematica.
+ * Implementa ISO 13616.
  * @author nicot
  */
 
-import java.math.BigInteger;
-
 public class ValidadorIBAN {
 
+    /**
+     * Valida un codigo IBAN.
+     * @param iban El codigo a verificar.
+     * @return true si es valido.
+     */
     public static boolean validar(String iban) {
         if (iban == null) return false;
 
-        // MEJORA: Quitamos espacios aqui mismo
         String ibanLimpio = iban.replace(" ", "").trim().toUpperCase();
 
-        // Usamos la variable limpia
         if (ibanLimpio.length() < 15 || ibanLimpio.length() > 34) return false;
 
         String reordenado = ibanLimpio.substring(4) + ibanLimpio.substring(0, 4);

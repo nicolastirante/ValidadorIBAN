@@ -4,15 +4,19 @@
  */
 package validadoriban;
 
+import java.util.Scanner;
+
 /**
- *
+ * Clase principal de la aplicacion.
  * @author nicot
  */
 
-import java.util.Scanner;
-
 public class IBANApp {
 
+    /**
+     * Metodo main de entrada.
+     * @param args Argumentos de consola.
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean seguir = true;
@@ -23,7 +27,6 @@ public class IBANApp {
             System.out.print("Ingrese IBAN: ");
             String entrada = scanner.nextLine();
 
-            // Llamamos a tu clase ValidadorIBAN
             if (ValidadorIBAN.validar(entrada)) {
                 System.out.println(">> VALIDO");
             } else {
